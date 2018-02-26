@@ -23,6 +23,7 @@ either use that and adjust it, or use
 
 ### Naming Conventions
 * [Use lowerCamelCase or snake_case for variables, properties, and function names](#use-lowercamelcase-or-snake_case-for-variables-properties-and-function-names)
+* [Use UpperCamelCase for class names](#use-uppercamelcase-for-class-names)
 * [Use UPPERCASE for Constants](#use-uppercase-for-constants)
 
 ### Variables
@@ -218,6 +219,24 @@ function hideHelper() {
     if(clicked_bar==false){
         $("#helper-occupation").fadeOut(700)
     };
+}
+```
+
+### Use UpperCamelCase for class names
+
+Class names should be capitalized using `UpperCamelCase`.
+
+*Right:*
+
+```js
+function BankAccount() {
+}
+```
+
+*Wrong:*
+
+```js
+function bank_Account() {
 }
 ```
 
