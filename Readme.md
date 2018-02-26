@@ -1,34 +1,28 @@
-# Node.js Style Guide
+# DataMade JavaScript Style Guide
 
-This is a guide for writing consistent and aesthetically pleasing node.js code.
-It is inspired by what is popular within the community, and flavored with some
-personal opinions.
+This guide outlines basic style rules and suggestions for writing JS in DataMade projects. 
+
+DataMade forked and customized the popular [Node.js style guide](https://github.com/felixge/node-style-guide), created by [Felix Geisendörfer](http://felixge.de/) and licensed under the [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
+license.
 
 There is a .jshintrc which enforces these rules as closely as possible. You can
 either use that and adjust it, or use
 [this script](https://gist.github.com/kentcdodds/11293570) to make your own.
 
-This guide was created by [Felix Geisendörfer](http://felixge.de/) and is
-licensed under the [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
-license. You are encouraged to fork this repository and make adjustments
-according to your preferences.
-
-![Creative Commons License](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
-
 ## Table of contents
 
 ### Formatting
-* [2 Spaces for indentation](#2-spaces-for-indentation)
+* [4 Spaces for indentation](#4-spaces-for-indentation)
 * [Newlines](#newlines)
 * [No trailing whitespace](#no-trailing-whitespace)
-* [Use Semicolons](#use-semicolons)
+* [Use semicolons most of the time](#use-semicolons-most-of-the-time)
 * [80 characters per line](#80-characters-per-line)
-* [Use single quotes](#use-single-quotes)
+* [Use single or double quotes](#use-single-or-double-quotes)
 * [Opening braces go on the same line](#opening-braces-go-on-the-same-line)
 * [Declare one variable per var statement](#declare-one-variable-per-var-statement)
 
 ### Naming Conventions
-* [Use lowerCamelCase for variables, properties and function names](#use-lowercamelcase-for-variables-properties-and-function-names)
+* [Use lowerCamelCase or snake_case for variables, properties, and function names](#use-lowercamelcase-or-snake_case-for-variables-properties-and-function-names)
 * [Use UpperCamelCase for class names](#use-uppercamelcase-for-class-names)
 * [Use UPPERCASE for Constants](#use-uppercase-for-constants)
 
@@ -37,7 +31,7 @@ according to your preferences.
 
 ### Conditionals
 * [Use the === operator](#use-the--operator)
-* [Use multi-line ternary operator](#use-multi-line-ternary-operator)
+* [Minimize use of the ternary operator](#minimize-use-of-the-ternary-operator)
 * [Use descriptive conditions](#use-descriptive-conditions)
 
 ### Functions
@@ -50,6 +44,10 @@ according to your preferences.
 ### Comments
 * [Use slashes for comments](#use-slashes-for-comments)
 
+### Django and JavaScript
+* [Stringify Django variables](#stringify-django-variables)
+* [Avoid Django filters](#avoid-django-filters-in-js)
+
 ### Miscellaneous
 * [Object.freeze, Object.preventExtensions, Object.seal, with, eval](#objectfreeze-objectpreventextensions-objectseal-with-eval)
 * [Requires At Top](#requires-at-top)
@@ -60,9 +58,9 @@ according to your preferences.
 
 You may want to use [editorconfig.org](http://editorconfig.org/) to enforce the formatting settings in your editor. Use the [Node.js Style Guide .editorconfig file](.editorconfig) to have indentation, newslines and whitespace behavior automatically set to the rules set up below.
 
-### 2 Spaces for indentation
+### 4 Spaces for indentation
 
-Use 2 spaces for indenting your code and swear an oath to never mix tabs and
+Use 4 spaces for indenting your code and swear an oath to never mix tabs and
 spaces - a special kind of hell is awaiting you otherwise.
 
 ### Newlines
@@ -76,15 +74,34 @@ Just like you brush your teeth after every meal, you clean up any trailing
 whitespace in your JS files before committing. Otherwise the rotten smell of
 careless neglect will eventually drive away contributors and/or co-workers.
 
-### Use Semicolons
+### Use semicolons most of the time
 
 According to [scientific research][hnsemicolons], the usage of semicolons is
 a core value of our community. Consider the points of [the opposition][], but
 be a traditionalist when it comes to abusing error correction mechanisms for
 cheap syntactic pleasures.
 
+Do not, however, use semicolons at the end of function declarations. They do not harm the code, but they do evaluate as an [empty statement][] and provide zero value.
+
+*Right:*
+
+```js
+function feedSeymour(sandwich) {
+    return sandwich;
+}
+```
+
+*Wrong:*
+
+```js
+function feedSeymour(sandwich) {
+    return sandwich;
+};
+```
+
 [the opposition]: http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding
 [hnsemicolons]: http://news.ycombinator.com/item?id=1547647
+[empty statement]: http://www.ecma-international.org/ecma-262/6.0/#sec-empty-statement
 
 ### 80 characters per line
 
@@ -92,20 +109,22 @@ Limit your lines to 80 characters. Yes, screens have gotten much bigger over the
 last few years, but your brain has not. Use the additional room for split screen,
 your editor supports that, right?
 
-### Use single quotes
+### Use single or double quotes
 
-Use single quotes, unless you are writing JSON.
+You may use single or double quotes - but be consistent throughout your code. Use double quotes for JSON.
 
 *Right:*
 
 ```js
 var foo = 'bar';
+var bar = 'foo';
 ```
 
 *Wrong:*
 
 ```js
 var foo = "bar";
+var bar = 'foo';
 ```
 
 ### Opening braces go on the same line
@@ -169,22 +188,38 @@ while (keys.length) {
 
 ## Naming Conventions
 
-### Use lowerCamelCase for variables, properties and function names
+### Use lowerCamelCase or snake_case for variables, properties, and function names
 
-Variables, properties and function names should use `lowerCamelCase`.  They
-should also be descriptive. Single character variables and uncommon
-abbreviations should generally be avoided.
+Variables, properties, and function names may use `lowerCamelCase` or `snake_case`. However, try to be consistent throughout the project. Names should also be descriptive. Single character variables and uncommon abbreviations should generally be avoided.
 
-*Right:*
+Note: CSS classes and ids usually contain hyphens, and functions borrowed from third-party libraries (e.g., `fadeOut`) might employ lowerCamelCase. No worries! Such inconsistently is inevitable: just be consistent within your own code.  
+
+*Looks good:*
 
 ```js
-var adminUser = db.query('SELECT * FROM users ...');
+function hideHelper() {
+    if(clickedBar==false){
+        $("#helper-occupation").fadeOut(700)
+    };
+}
 ```
 
-*Wrong:*
+```js
+function hide_helper() {
+    if(clicked_bar==false){
+        $("#helper-occupation").fadeOut(700)
+    };
+}
+```
+
+*Not great:*
 
 ```js
-var admin_user = db.query('SELECT * FROM users ...');
+function hideHelper() {
+    if(clicked_bar==false){
+        $("#helper-occupation").fadeOut(700)
+    };
+}
 ```
 
 ### Use UpperCamelCase for class names
@@ -288,22 +323,24 @@ if (a == '') {
 
 [comparisonoperators]: https://developer.mozilla.org/en/JavaScript/Reference/Operators/Comparison_Operators
 
-### Use multi-line ternary operator
+### Minimize use of the ternary operator
 
-The ternary operator should not be used on a single line. Split it up into multiple lines instead.
+Use the ternary operator only when it presents straightforward conditional results. If you need to split your code into multiple lines, use `if` and `else` wrappers instead. [What would a ninja do?](http://javascript.info/ninja-code#brevity-is-the-soul-of-wit)
 
 *Right:*
 
 ```js
-var foo = (a === b)
-  ? 1
-  : 2;
+var myTruthiness = (text != null) ? True : False
 ```
 
 *Wrong:*
 
 ```js
-var foo = (a === b) ? 1 : 2;
+var myTruthiness = (text != null) && (text != '') && (text != 'gerbils')
+  ? truthArray.push(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  : truthArray.splice(0, 1)
+              .push('hamsters')
+              .reverse()
 ```
 
 ### Use descriptive conditions
@@ -519,6 +556,40 @@ var isSessionValid = (session.expires < Date.now());
 if (isSessionValid) {
   // ...
 }
+```
+
+## Django and JavaScript
+
+### Stringify Django variables
+
+It is possible to use Django context variables in JavaScript. Cast these as strings within the JS.
+
+*Right:*
+
+```js
+var my_value = '{{ my_value }}';
+```
+
+*Wrong:*
+
+```js
+var my_value = {{ my_value }};
+```
+
+### Avoid Python filters
+
+Avoid calling standard Django or custom-built filters on the client-side. If you need to transform a value for use in JS, then do that transformation in the Django view.
+
+*Right:*
+
+```js
+var my_value = '{{ my_value_transformed }}';
+```
+
+*Wrong:*
+
+```js
+var my_value = {{ my_value|custom_filter }};
 ```
 
 ## Miscellaneous
