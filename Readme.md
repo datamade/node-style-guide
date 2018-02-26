@@ -80,7 +80,7 @@ a core value of our community. Consider the points of [the opposition][], but
 be a traditionalist when it comes to abusing error correction mechanisms for
 cheap syntactic pleasures.
 
-Do not  use semicolons at the end of function declarations. They do not harm the code, but they do evaluate as an [empty statement][] and provide zero value.
+Do not, however, use semicolons at the end of function declarations. They do not harm the code, but they do evaluate as an [empty statement][] and provide zero value.
 
 *Right:*
 
@@ -189,7 +189,9 @@ while (keys.length) {
 
 ### Use lowerCamelCase or snake_case for variables, properties, and function names
 
-Variables, properties, and function names may use `lowerCamelCase` or `snake_case`. However, try to be consistent throughout the project. Do not stress about the inevitable hyphens in CSS class and id names or functions borrowed from third-[arty libraries (e.g., `fadeOut`). Names should also be descriptive. Single character variables and uncommon abbreviations should generally be avoided.
+Variables, properties, and function names may use `lowerCamelCase` or `snake_case`. However, try to be consistent throughout the project. Names should also be descriptive. Single character variables and uncommon abbreviations should generally be avoided.
+
+Note: CSS classes and ids usually contain hyphens, and functions borrowed from third-party libraries (e.g., `fadeOut`) might employ lowerCamelCase. No worries! Such inconsistently is inevitable: just be consistent within your own code.  
 
 *Looks good:*
 
@@ -304,7 +306,7 @@ if (a == '') {
 
 ### Minimize use of the ternary operator
 
-Use the ternary operator only when it presents straightforward conditional results. If you need to split your code into multiple lines, use `if` and `else` wrappers instead. [Think like a ninja - or not.](http://javascript.info/ninja-code#brevity-is-the-soul-of-wit)
+Use the ternary operator only when it presents straightforward conditional results. If you need to split your code into multiple lines, use `if` and `else` wrappers instead. [What would a ninja do?](http://javascript.info/ninja-code#brevity-is-the-soul-of-wit)
 
 *Right:*
 
@@ -317,7 +319,9 @@ var myTruthiness = (text != null) ? True : False
 ```js
 var myTruthiness = (text != null) && (text != '') && (text != 'gerbils')
   ? truthArray.push(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-  : truthArray.splice(0, 1).push('hamsters')
+  : truthArray.splice(0, 1)
+              .push('hamsters')
+              .reverse()
 ```
 
 ### Use descriptive conditions
@@ -539,7 +543,7 @@ if (isSessionValid) {
 
 ### Stringify Django variables
 
-It is possible to use a Django context variables in JavaScript. Cast these as strings within the JS.
+It is possible to use Django context variables in JavaScript. Cast these as strings within the JS.
 
 *Right:*
 
