@@ -24,8 +24,7 @@ either use that and adjust it, or use
 * [Declare one variable per var statement](#declare-one-variable-per-var-statement)
 
 ### Naming Conventions
-* [Use lowerCamelCase or snake_case for variables, properties, and function names](#use-lowercamelcase-or snake_case-for-variables-properties-and-function-names)
-[Use lowerCamelCase for variables, properties and function names](#use-lowercamelcase-or-snake_case-for-variables-properties-and-function-names)
+* [Use lowerCamelCase or snake_case for variables, properties, and function names](#use-lowercamelcase-or-snake_case-for-variables-properties-and-function-names)
 * [Use UPPERCASE for Constants](#use-uppercase-for-constants)
 
 ### Variables
