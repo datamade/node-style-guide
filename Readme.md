@@ -24,7 +24,7 @@ either use that and adjust it, or use
 * [Declare one variable per var statement](#declare-one-variable-per-var-statement)
 
 ### Naming Conventions
-* [Use lowerCamelCase or snake_case for variables, properties, and function names](#use-lower-camelcase-or-snake-case-for-variables-properties-and-function-names)
+* [Use lowerCamelCase or snake_case for variables, properties, and function names](#use-lowercamelcase-or snake_case-for-variables-properties-and-function-names)
 * [Use UPPERCASE for Constants](#use-uppercase-for-constants)
 
 ### Variables
@@ -32,7 +32,7 @@ either use that and adjust it, or use
 
 ### Conditionals
 * [Use the === operator](#use-the--operator)
-* [Use multi-line ternary operator](#use-multi-line-ternary-operator)
+* [Minimize use of the ternary operator](#minimize-use-of-the-ternary-operator)
 * [Use descriptive conditions](#use-descriptive-conditions)
 
 ### Functions
@@ -164,7 +164,7 @@ while (keys.length) {
 
 ## Naming Conventions
 
-### Use lowerCamelCase or snake_case for variables, properties, and function names - just be consistent
+### Use lowerCamelCase or snake_case for variables, properties, and function names
 
 Variables, properties, and function names may use `lowerCamelCase` or `snake_case`. However, try to be consistent throughout the project. Do not stress about the inevitable hyphens in CSS class and id names or functions borrowed from third-[arty libraries (e.g., `fadeOut`). Names should also be descriptive. Single character variables and uncommon abbreviations should generally be avoided.
 
@@ -279,22 +279,22 @@ if (a == '') {
 
 [comparisonoperators]: https://developer.mozilla.org/en/JavaScript/Reference/Operators/Comparison_Operators
 
-### Use multi-line ternary operator
+### Minimize use of the ternary operator
 
-The ternary operator should not be used on a single line. Split it up into multiple lines instead.
+Use the ternary operator only when it presents straightforward conditional results. If you need to split your code into multiple lines, use `if` and `else` wrappers instead. [Think like a ninja - or not.](http://javascript.info/ninja-code#brevity-is-the-soul-of-wit)
 
 *Right:*
 
 ```js
-var foo = (a === b)
-  ? 1
-  : 2;
+var myTruthiness = (text != null) ? True : False
 ```
 
 *Wrong:*
 
 ```js
-var foo = (a === b) ? 1 : 2;
+var myTruthiness = (text != null) && (text != '') && (text != 'gerbils')
+  ? truthArray.push(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  : truthArray.splice(0, 1).push('hamsters')
 ```
 
 ### Use descriptive conditions
