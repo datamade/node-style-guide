@@ -5,8 +5,6 @@ This guide outlines basic style rules and suggestions for writing JS in DataMade
 DataMade forked and customized the popular [Node.js style guide](https://github.com/felixge/node-style-guide), created by [Felix Geisendörfer](http://felixge.de/) and licensed under the [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
 license.
 
-![Creative Commons License](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
-
 There is a .jshintrc which enforces these rules as closely as possible. You can
 either use that and adjust it, or use
 [this script](https://gist.github.com/kentcdodds/11293570) to make your own.
@@ -14,12 +12,12 @@ either use that and adjust it, or use
 ## Table of contents
 
 ### Formatting
-* [2 Spaces for indentation](#2-spaces-for-indentation)
+* [4 Spaces for indentation](#4-spaces-for-indentation)
 * [Newlines](#newlines)
 * [No trailing whitespace](#no-trailing-whitespace)
-* [Use Semicolons](#use-semicolons)
+* [Use semicolons most of the time](#use-semicolons-most-of-the-time)
 * [80 characters per line](#80-characters-per-line)
-* [Use single quotes](#use-single-quotes)
+* [Use single or double quotes](#use-single-or-double-quotes)
 * [Opening braces go on the same line](#opening-braces-go-on-the-same-line)
 * [Declare one variable per var statement](#declare-one-variable-per-var-statement)
 
@@ -45,6 +43,10 @@ either use that and adjust it, or use
 ### Comments
 * [Use slashes for comments](#use-slashes-for-comments)
 
+### Django and JavaScript
+* [Stringify Django variables](#stringify-django-variables)
+* [Avoid Django filters](#avoid-django-filters-in-js)
+
 ### Miscellaneous
 * [Object.freeze, Object.preventExtensions, Object.seal, with, eval](#objectfreeze-objectpreventextensions-objectseal-with-eval)
 * [Requires At Top](#requires-at-top)
@@ -55,9 +57,9 @@ either use that and adjust it, or use
 
 You may want to use [editorconfig.org](http://editorconfig.org/) to enforce the formatting settings in your editor. Use the [Node.js Style Guide .editorconfig file](.editorconfig) to have indentation, newslines and whitespace behavior automatically set to the rules set up below.
 
-### 2 Spaces for indentation
+### 4 Spaces for indentation
 
-Use 2 spaces for indenting your code and swear an oath to never mix tabs and
+Use 4 spaces for indenting your code and swear an oath to never mix tabs and
 spaces - a special kind of hell is awaiting you otherwise.
 
 ### Newlines
@@ -71,15 +73,34 @@ Just like you brush your teeth after every meal, you clean up any trailing
 whitespace in your JS files before committing. Otherwise the rotten smell of
 careless neglect will eventually drive away contributors and/or co-workers.
 
-### Use Semicolons
+### Use semicolons most of the time
 
 According to [scientific research][hnsemicolons], the usage of semicolons is
 a core value of our community. Consider the points of [the opposition][], but
 be a traditionalist when it comes to abusing error correction mechanisms for
 cheap syntactic pleasures.
 
+Do not  use semicolons at the end of function declarations. They do not harm the code, but they do evaluate as an [empty statement][] and provide zero value.
+
+*Right:*
+
+```js
+function feedSeymour(sandwich) {
+    return sandwich;
+}
+```
+
+*Wrong:*
+
+```js
+function feedSeymour(sandwich) {
+    return sandwich;
+};
+```
+
 [the opposition]: http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding
 [hnsemicolons]: http://news.ycombinator.com/item?id=1547647
+[empty statement]: http://www.ecma-international.org/ecma-262/6.0/#sec-empty-statement
 
 ### 80 characters per line
 
@@ -87,20 +108,22 @@ Limit your lines to 80 characters. Yes, screens have gotten much bigger over the
 last few years, but your brain has not. Use the additional room for split screen,
 your editor supports that, right?
 
-### Use single quotes
+### Use single or double quotes
 
-Use single quotes, unless you are writing JSON.
+You may use single or double quotes - but be consistent throughout your code. Use double quotes for JSON.
 
 *Right:*
 
 ```js
 var foo = 'bar';
+var bar = 'foo';
 ```
 
 *Wrong:*
 
 ```js
 var foo = "bar";
+var bar = 'foo';
 ```
 
 ### Opening braces go on the same line
@@ -510,6 +533,40 @@ var isSessionValid = (session.expires < Date.now());
 if (isSessionValid) {
   // ...
 }
+```
+
+## Django and JavaScript
+
+### Stringify Django variables
+
+It is possible to use a Django context variables in JavaScript. Cast these as strings within the JS.
+
+*Right:*
+
+```js
+var my_value = '{{ my_value }}';
+```
+
+*Wrong:*
+
+```js
+var my_value = {{ my_value }};
+```
+
+### Avoid Python filters
+
+Avoid calling standard Django or custom-built filters on the client-side. If you need to transform a value for use in JS, then do that transformation in the Django view.
+
+*Right:*
+
+```js
+var my_value = '{{ my_value_transformed }}';
+```
+
+*Wrong:*
+
+```js
+var my_value = {{ my_value|custom_filter }};
 ```
 
 ## Miscellaneous
