@@ -1,19 +1,15 @@
-# Node.js Style Guide
+# DataMade JavaScript Style Guide
 
-This is a guide for writing consistent and aesthetically pleasing node.js code.
-It is inspired by what is popular within the community, and flavored with some
-personal opinions.
+This guide outlines basic style rules and suggestions for writing JS in DataMade projects. 
+
+DataMade forked and customized the popular [Node.js style guide](https://github.com/felixge/node-style-guide), created by [Felix Geisendörfer](http://felixge.de/) and licensed under the [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
+license.
+
+![Creative Commons License](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
 
 There is a .jshintrc which enforces these rules as closely as possible. You can
 either use that and adjust it, or use
 [this script](https://gist.github.com/kentcdodds/11293570) to make your own.
-
-This guide was created by [Felix Geisendörfer](http://felixge.de/) and is
-licensed under the [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
-license. You are encouraged to fork this repository and make adjustments
-according to your preferences.
-
-![Creative Commons License](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
 
 ## Table of contents
 
@@ -28,8 +24,7 @@ according to your preferences.
 * [Declare one variable per var statement](#declare-one-variable-per-var-statement)
 
 ### Naming Conventions
-* [Use lowerCamelCase for variables, properties and function names](#use-lowercamelcase-for-variables-properties-and-function-names)
-* [Use UpperCamelCase for class names](#use-uppercamelcase-for-class-names)
+* [Use lowerCamelCase or snake_case for variables, properties, and function names](#use-lower-camelcase-or-snake-case-for-variables-properties-and-function-names)
 * [Use UPPERCASE for Constants](#use-uppercase-for-constants)
 
 ### Variables
@@ -169,39 +164,35 @@ while (keys.length) {
 
 ## Naming Conventions
 
-### Use lowerCamelCase for variables, properties and function names
+### Use lowerCamelCase or snake_case for variables, properties, and function names - just be consistent
 
-Variables, properties and function names should use `lowerCamelCase`.  They
-should also be descriptive. Single character variables and uncommon
-abbreviations should generally be avoided.
+Variables, properties, and function names may use `lowerCamelCase` or `snake_case`. However, try to be consistent throughout the project. Do not stress about the inevitable hyphens in CSS class and id names or functions borrowed from third-[arty libraries (e.g., `fadeOut`). Names should also be descriptive. Single character variables and uncommon abbreviations should generally be avoided.
 
-*Right:*
+*Looks good:*
 
 ```js
-var adminUser = db.query('SELECT * FROM users ...');
-```
-
-*Wrong:*
-
-```js
-var admin_user = db.query('SELECT * FROM users ...');
-```
-
-### Use UpperCamelCase for class names
-
-Class names should be capitalized using `UpperCamelCase`.
-
-*Right:*
-
-```js
-function BankAccount() {
+function hideHelper() {
+    if(clickedBar==false){
+        $("#helper-occupation").fadeOut(700)
+    };
 }
 ```
 
-*Wrong:*
+```js
+function hide_helper() {
+    if(clicked_bar==false){
+        $("#helper-occupation").fadeOut(700)
+    };
+}
+```
+
+*Not great:*
 
 ```js
-function bank_Account() {
+function hideHelper() {
+    if(clicked_bar==false){
+        $("#helper-occupation").fadeOut(700)
+    };
 }
 ```
 
