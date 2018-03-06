@@ -1,14 +1,40 @@
 {
-  "curly": true, // Put curly braces around conditional blocks & loops ("Use closures, but don't nest them")
-  "eqeqeq": true, // Use deep-equals for comparison ("Use the === operator")
-  "freeze": true, // Prohibit extension of native objects, i.e., String ("Do not extend built-in prototypes")
-  "maxdepth": 3, // Set max depth of nested blocks ("Use closures, but don't nest them")
-  "maxstatements": 25, // Set max number of statements allowed per function ("Write small functions")
-  "eqnull": true, // Allow comparisons to null
-  "undef": true, // Complain about variables referenced but not defined
-  "unused": true, // Complain about variables defined but not referenced
-  "funcscope": true, // Allow variables to be set in conditional blocks and used later
-  "jquery": true, // Complain about use of about global variables from jquery
-  "browser": true, // Complain about use of global variables in browsers
-  "devel": true // Complain about errant console & alert statements
+  // Put curly braces around conditional blocks & loops
+  "curly": true,
+
+  // Use deep-equals for comparison
+  "eqeqeq": true,
+
+  // Prohibit extension of native objects, i.e., String
+  "freeze": true,
+
+  // Set max depth of nested blocks
+  "maxdepth": 3,
+
+  // Set max number of statements allowed per function
+  "maxstatements": 25,
+
+  // Allow comparisons to null
+  "eqnull": true,
+
+  // Complain about variables referenced but not defined
+  "undef": true,
+  // n.b. If your variable is defined somewhere else, set globals in
+  // your jshintrc (http://jshint.com/docs/options/#globals), or inline
+  // (http://jshint.com/docs/#inline-configuration) to quiet this warning
+
+  // Complain about variables defined but not referenced
+  "unused": true,
+
+  // Allow variables to be set in conditional blocks and used later
+  "funcscope": true,
+
+  // Complain about use of about global variables from jquery
+  "jquery": true,
+
+  // Complain about use of global variables in browsers
+  "browser": true,
+
+  // Complain about errant console & alert statements
+  "devel": true
 }
