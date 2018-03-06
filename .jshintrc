@@ -1,11 +1,18 @@
+// The DataMade Default .jshintrc
+// To customize, check out all available options here:
+// http://jshint.com/docs/options/
+
 {
+  // Set syntax to ES5 (e.g., complain about use of ES6 features)
+  "esversion": 5,
+
   // Put curly braces around conditional blocks & loops
   "curly": true,
 
   // Use deep-equals for comparison
   "eqeqeq": true,
 
-  // Prohibit extension of native objects, i.e., String
+  // Complain about overwriting methods on native objects, i.e., String
   "freeze": true,
 
   // Set max depth of nested blocks
@@ -18,10 +25,11 @@
   "eqnull": true,
 
   // Complain about variables referenced but not defined
-  "undef": true,
+  //
   // n.b. If your variable is defined somewhere else, set globals in
   // your jshintrc (http://jshint.com/docs/options/#globals), or inline
   // (http://jshint.com/docs/#inline-configuration) to quiet this warning
+  "undef": true,
 
   // Complain about variables defined but not referenced
   "unused": true,
@@ -29,7 +37,7 @@
   // Allow variables to be set in conditional blocks and used later
   "funcscope": true,
 
-  // Complain about use of about global variables from jquery
+  // Complain about use of global variables from jquery
   "jquery": true,
 
   // Complain about use of global variables in browsers
