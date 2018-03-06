@@ -1,15 +1,14 @@
 {
-  "camelcase": true,
-  "curly": true,
-  "eqeqeq": true,
-  "freeze": true,
-  "indent": 2,
-  "newcap": true,
-  "quotmark": "single",
-  "maxdepth": 3,
-  "maxstatements": 15,
-  "maxlen": 80,
-  "eqnull": true,
-  "funcscope": true,
-  "node": true
+  "curly": true, // Put curly braces around conditional blocks & loops ("Use closures, but don't nest them")
+  "eqeqeq": true, // Use deep-equals for comparison ("Use the === operator")
+  "freeze": true, // Prohibit extension of native objects, i.e., String ("Do not extend built-in prototypes")
+  "maxdepth": 3, // Set max depth of nested blocks ("Use closures, but don't nest them")
+  "maxstatements": 25, // Set max number of statements allowed per function ("Write small functions")
+  "eqnull": true, // Allow comparisons to null
+  "undef": true, // Complain about variables referenced but not defined
+  "unused": true, // Complain about variables defined but not referenced
+  "funcscope": true, // Allow variables to be set in conditional blocks and used later
+  "jquery": true, // Complain about use of about global variables from jquery
+  "browser": true, // Complain about use of global variables in browsers
+  "devel": true // Complain about errant console & alert statements
 }
